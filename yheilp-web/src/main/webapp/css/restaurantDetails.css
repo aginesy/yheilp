@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    margin: 0;
+    background-image: linear-gradient(lightgray, #aaa);
+    padding-top: 4em;
+}
+
+a {
+    color: #dd9933;
+}
+
+a:hover {
+    color: #3399dd;
+    text-decoration: none;
+}
+
+/* HEADER*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background-color: #333366;
+    color: white;
+    /*color: #ffffff;*/
+    padding-left: 5em;
+
+    border-bottom: lightgray solid 0.3em;
+}
+
+h1 {
+    margin: 0;
+    line-height: 4rem;
+    
+}
+
+/* JEUX*/
+article {
+    background-color: white;
+    width: 80%;
+    margin: 1em auto;
+}
+
+h2 {
+    background-color: #663333;
+    color: white;
+    text-align: right;
+    padding-right: 5em;
+    line-height: 5em;
+    letter-spacing: 0.5em;
+}
+
+h3 {
+    text-decoration: underline;
+    padding-left: 3em;
+}
+
+p {
+    background-color: #f0f0f0;
+    margin: 1em 10%;
+    padding: 1em;
+    border-style: solid;
+    border-color: #333366;
+    border-width: 0 0.3em 0 1em;
+}
+
+/* IMAGES */
+
+figure {
+    display: inline-block;
+    width: 40%;
+    margin: 3%;
+    box-shadow: 0 0 5px #333366;
+}
+
+figure img {
+    width: 94%;
+    margin: 3%;
+}
+
+figure figcaption {
+    text-align: center;
+    font-size: 0.6em;
+    border-top: #333366 solid 1px;
+    padding: 1em;
+}
+
+/* AVIS*/
+section.avis {
+    position: relative;
+}
+
+section.points {
+    display: inline-block;
+    width: 40%;
+    margin: 3%;
+    vertical-align: top;
+}
+
+section.points h4 {
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 1em 2em;
+    border-bottom: #333366 dashed 2px;
+}
+
+section.points ul {
+    background-color: #333366;
+    color: white;
+    margin: 0;
+    padding: 2em 1em;
+    list-style-type: none;
+}
+
+section.points ul li {
+    margin: 0.5em 0;
+}
+
+/* NOTE */
+section.note {
+    position: absolute;
+    top: -1em;
+    left: -3em;
+
+    background-color: #663333;
+    color: white;
+    padding: 0.5em;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #333366;
+
+    transform: rotate(-20deg);
+}
+
+section.note h4 {
+    text-align: center;
+    font-size: 0.7em;
+    margin:  0;
+}
+
+section.note p {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+/* FORMULAIRE */
+
+#commentaire ul {
+    list-style-type: none;
+}
+
+#commentaire ul li {
+    margin: 0.5em;
+}
+
+input, select, textarea {
+    background-color: #f0f0f0;
+    border: #333366 solid 1px;
+    border-radius: 3px;
+}
+
+textarea {
+    width: 50%;
+    height: 5em;
+}
+
+label {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    margin-right: 1em ;
+    vertical-align: top;
+}
+
+#commentaire p {
+    border: none;
+}
+
+input[type=submit],input[type=reset] {
+    background-color: #333366;
+    padding: 1em 2em;
+    border: 0;
+    border-radius: 0;
+    color: white;
+    cursor: pointer;
+}
+
+input[type=submit]:hover,input[type=reset]:hover {
+    background-color: #663333;
+}
