@@ -1,4 +1,12 @@
 package yheilp.core.dao;
 
-public class RestaurantDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import yheilp.core.entity.Restaurant;
+
+public interface RestaurantDAO extends JpaRepository<Restaurant,Long> {
+
+    @Query("SELECT DISTINCT r FROM Restaurant r  LEFT JOIN FETCH r.notes LEFT JOIN FETCH r.lieux LEFT JOIN FETCH r.commentaires WHERE r.id=:id")
+    Restaurant getOneWithNotesLieuxAndCommentaires(@Param("id") long bookId);
 }
