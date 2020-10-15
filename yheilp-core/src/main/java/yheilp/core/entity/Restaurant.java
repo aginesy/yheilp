@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+@Entity
 public class Restaurant {
 
     @Id
@@ -17,17 +18,13 @@ public class Restaurant {
     private String description;
 
     @ManyToOne
-    @JoinTable(
-            name = "restaurant_lieux",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "lieux_id"))
     private Lieux lieux;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<Note> note;
+    @OneToMany
+    private List<Note> notes;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<Commentaire> commentaire;
+    @OneToMany
+    private List<Commentaire> commentaires;
 
     public Long getId() {
         return id;
@@ -69,19 +66,19 @@ public class Restaurant {
         this.lieux = lieux;
     }
 
-    public List<Note> getNote() {
-        return note;
+    public List<Note> getNotes() {
+        return notes;
     }
 
-    public void setNote(List<Note> note) {
-        this.note = note;
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
-    public List<Commentaire> getCommentaire() {
-        return commentaire;
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
     }
 
-    public void setCommentaire(List<Commentaire> commentaire) {
-        this.commentaire = commentaire;
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 }

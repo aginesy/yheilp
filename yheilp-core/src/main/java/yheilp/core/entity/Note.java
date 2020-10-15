@@ -15,11 +15,7 @@ public class Note {
     private int score;
 
     @ManyToOne
-    @JoinTable(
-            name = "note_restaurant",
-            joinColumns = @JoinColumn(name = "note_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    private Lieux lieux;
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -37,11 +33,11 @@ public class Note {
         this.score = score;
     }
 
-    public Lieux getLieux() {
-        return lieux;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setLieux(Lieux lieux) {
-        this.lieux = lieux;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

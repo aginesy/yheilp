@@ -14,11 +14,7 @@ public class Commentaire {
     private String description;
 
     @ManyToOne
-    @JoinTable(
-            name = "commentaire_restaurant",
-            joinColumns = @JoinColumn(name = "commentaire_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    private Lieux lieux;
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -36,11 +32,11 @@ public class Commentaire {
         this.description = description;
     }
 
-    public Lieux getLieux() {
-        return lieux;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setLieux(Lieux lieux) {
-        this.lieux = lieux;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

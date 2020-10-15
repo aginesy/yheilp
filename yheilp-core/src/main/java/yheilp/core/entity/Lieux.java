@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@JsonIgnoreProperties({ "restaurants" })
 public class Lieux {
 
     @Id
@@ -20,6 +19,46 @@ public class Lieux {
 
     private String description;
 
-    @OneToMany(mappedBy = "lieux")
+    @OneToMany
     private List<Restaurant> restaurants;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
 }
