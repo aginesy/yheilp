@@ -18,7 +18,7 @@ public class RestaurantService {
     }
 
     public Restaurant findRestaurantDetails(long restaurantId) {
-        return restaurantDAO.getOneWithNotesLieuxAndCommentaires(restaurantId);
+        return restaurantDAO.getOneWithNoteLieuxAndCommentaire(restaurantId);
     }
 
 }
