@@ -3,8 +3,12 @@ package yheilp.core.service;
 import yheilp.core.dao.RestaurantDAO;
 import yheilp.core.entity.Restaurant;
 
+import javax.inject.Named;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Named
+@Transactional
 public class RestaurantService {
 
     private RestaurantDAO restaurantDAO;

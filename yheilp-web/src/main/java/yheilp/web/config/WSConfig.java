@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.web.bind.annotation.RestController;
+import yheilp.web.controller.RestController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
