@@ -1,87 +1,46 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" ng-app="yheilp">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil</title>
+    <title>YHEILP</title>
 
     <link rel="stylesheet" type="text/css" href="css/restaurantDetails.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<header>
-    <h1>Accueil</h1>
-</header>
-<main>
-    <article id="restaurant">
-        <h2>PANCOOK Lille</h2>
-        <h3>Descriptif</h3>
-        <p>Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).</p>
-
-        <h3>Aperçus du restaurant</h3>
-
-        <figure>
-            <img src="picture1.png" alt="Image du restaurant">
-            <figcaption>Légende1</figcaption>
-        </figure>
-
-        <figure>
-            <img src="picture2.png" alt="Image du restaurant">
-            <figcaption>Légende2</figcaption>
-        </figure>
-
-        <section class="map">
-        	<p>MAAAAP</p>
-        </section>
-
-        <section class="avis">
-            <h3>Les avis</h3>
-
-            <section class="points">
-                <h4>Les commentaires</h4>
-                <ul>
-                    <li>Commentaire1</li>
-                    <li>Commentaire2</li>
-                    <li>Commentaire3</li>
-                    <li>Commentaire4</li>
-                </ul>
-            </section>
-
-            <section class="points">
-                <h4>Les notes</h4>
-                <ul>
-                    <li>Note1</li>
-                    <li>Note2</li>
-                    <li>Note3</li>
-                </ul>
-            </section>
-        </section>
-    </article>
-
-    <article id="notes">
-    	<h2>Notes</h2>
-    </article>
-
-    <article id="commentaire">
-        <h2>Commentaire</h2>
-        <form method="post" action="jeux.html">
-            <ul>
-                <li>
-                    <label for="id_nom">Nom</label>
-                    <input type="text" name="nom" id="id_nom">
-                </li>
-                <li>
-                    <label for="id_commentaire">Commentaire</label>
-                    <textarea name="commentaire" id="id_commentaire"></textarea>
-                </li>
-            </ul>
-            <p>
-                <input type="reset" value="Annuler">
-                <input type="submit" value="Envoyer">
-            </p>
-        </form>
-    </article>
 
 
-</main>
+<div class="fluid-container" ng-controller="RestaurantController as ctrl">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+            <a class="navbar-brand" href="#">YHEILP</a>
+        </nav>
+    </header>
+
+    <ul class="list-group">
+        <li ng-repeat="(id,title) in ctrl.restaurants " class="list-group-item">
+            {{title}}
+            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">getDetails</a>
+        </li>
+    </ul>
+
+
+</div>
+
+<script>
+    angular.module("yheilp", []).controller("RestaurantController", function ($http) {
+        var that = this;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8080/yheilp/api/restaurants/'
+        }).then(function successCallback(response) {
+            that.restaurants = response.data;
+        });
+
+    });
+</script>
 
 </body>
 </html>

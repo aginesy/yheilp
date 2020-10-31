@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,4 +81,7 @@ public class Restaurant {
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
+
+    @Override
+    public int compareTo(Restaurant o) { return title.compareTo(o.title); }
 }

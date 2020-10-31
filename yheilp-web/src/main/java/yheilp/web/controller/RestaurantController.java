@@ -21,7 +21,6 @@ public class RestaurantController implements RestController {
 
     private RestaurantService restaurantService;
 
-
     public RestaurantController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }

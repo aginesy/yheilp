@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+
+    <link rel="stylesheet" type="text/css" href="css/restaurantDetails.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<header>
+    <h1>Accueil</h1>
+</header>
+<main>
+    <article id="restaurant">
+        <h2>PANCOOK Lille</h2>
+        <h3>Descriptif</h3>
+        <p>Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).</p>
+
+        <h3>Aperçus du restaurant</h3>
+
+        <figure>
+            <img src="picture1.png" alt="Image du restaurant">
+            <figcaption>Légende1</figcaption>
+        </figure>
+
+        <figure>
+            <img src="picture2.png" alt="Image du restaurant">
+            <figcaption>Légende2</figcaption>
+        </figure>
+
+        <section class="map">
+        	<p>MAAAAP</p>
+        </section>
+
+        <section class="avis">
+            <h3>Les avis</h3>
+
+            <section class="points">
+                <h4>Les commentaires</h4>
+                <ul>
+                    <li>Commentaire1</li>
+                    <li>Commentaire2</li>
+                    <li>Commentaire3</li>
+                    <li>Commentaire4</li>
+                </ul>
+            </section>
+
+            <section class="points">
+                <h4>Les notes</h4>
+                <ul>
+                    <li>Note1</li>
+                    <li>Note2</li>
+                    <li>Note3</li>
+                </ul>
+            </section>
+        </section>
+    </article>
+
+    <article id="notes">
+    	<h2>Notes</h2>
+    </article>
+
+    <article id="commentaire">
+        <h2>Commentaire</h2>
+        <form method="post" action="jeux.html">
+            <ul>
+                <li>
+                    <label for="id_nom">Nom</label>
+                    <input type="text" name="nom" id="id_nom">
+                </li>
+                <li>
+                    <label for="id_commentaire">Commentaire</label>
+                    <textarea name="commentaire" id="id_commentaire"></textarea>
+                </li>
+            </ul>
+            <p>
+                <input type="reset" value="Annuler">
+                <input type="submit" value="Envoyer">
+            </p>
+        </form>
+    </article>
+
+
+</main>
+
+
+<script>
+    angular.module("bibliotech", []).controller("BooksController", function ($http) {
+        var that = this;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8081/lab06/api/books/'
+        }).then(function successCallback(response) {
+            that.books = response.data;
+        });
+
+        var refreshSelected = function (bookId) {
+            this.selected = {};
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8081/lab06/api/books/' + bookId
+            }).then(function successCallback(response) {
+                that.selected = response.data;
+                that.selected.author = that.selected.authors.join(", ");
+            });
+
+        };
+        this.loadModal = function (bookId) {
+            refreshSelected(bookId);
+        }
+
+        this.addReview = function (score) {
+            var review = {"score": score, "book": {"id": this.selected.id}, "dateOfReview": new Date()};
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8081/lab06/api/reviews',
+                data: review
+            }).then(function successCallback(response) {
+                refreshSelected(that.selected.id);
+            });
+        }
+
+        this.deleteReview = function (reviewId) {
+            $http({
+                method: 'DELETE',
+                url: 'http://localhost:8081/lab06/api/reviews/' + reviewId,
+            }).then(function successCallback(response) {
+                refreshSelected(that.selected.id);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
