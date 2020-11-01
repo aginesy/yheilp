@@ -1,0 +1,28 @@
+body {
+    padding-top: 5rem;
+}
+
+
+/* SPLASHSCREEN */
+.splashscreen.ng-cloak {
+    visibility: visible;
+    opacity: 1;
+}
+
+.splashscreen {
+    transition: all 1s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    background-color: white;
+    visibility: hidden;
+    opacity: 0;
+    text-align: center;
+}
+
+.splashscreen small {
+    font-size: 50%;
+}
