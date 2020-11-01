@@ -1,7 +1,9 @@
 package yheilp.web.controller;
 
+import yheilp.core.entity.Note;
 import yheilp.core.entity.Restaurant;
 import yheilp.core.service.RestaurantService;
+import yheilp.web.dto.RestaurantDTO;
 
 import javax.ws.rs.*;
 
@@ -31,6 +33,16 @@ public class RestaurantController implements RestController {
         return restaurantService.findAll().stream().collect(Collectors.toMap(Restaurant::getId, Restaurant::getTitle));
     }
 
-    //Todo findRestaurantDetails
+    @GET
+    @Path("/{restaurantId}")
+    public RestaurantDTO findRestaurantDetails(@PathParam("restaurantId") long restaurantId){
+        Restaurant restaurant = restaurantService.findRestaurantDetails(restaurantId);
+        RestaurantDTO restaurantDTO = new RestaurantDTO();
+        restaurantDTO.setId(restaurantId);
+        restaurantDTO.setTitle(restaurant.getTitle());
+        restaurantDTO.setImage(restaurant.getImage());
+        restaurantDTO.setDescription(restaurant.getDescription());
+        return restaurantDTO;
+    }
 
 }
