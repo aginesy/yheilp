@@ -57,7 +57,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.title}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -109,7 +109,7 @@
                                 <p class="card-text">description</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">View</a>
+                                        <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Voir</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,15 +152,19 @@
     </script>
 
     </body>
-    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 </main>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
 <footer class="text-muted">
     <div class="container">
         <p class="float-right">
-            <a href="#">Back to top</a>
+            <a href="#">Revenir en haut</a>
         </p>
-        <p>This site has been made by Alexis & Alexandre!</p>
+        <p>Ce site a été réalisé par Alexis & Alexandre!</p>
     </div>
 </footer>
+
+
 </html>
