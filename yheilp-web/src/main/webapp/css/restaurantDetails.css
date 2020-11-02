@@ -14,7 +14,7 @@ a {
 }
 
 a:hover {
-    color: #3399dd;
+    color: #209cee;
     text-decoration: none;
 }
 
@@ -25,7 +25,7 @@ header {
     left: 0;
     right: 0;
 
-    background-color: #333366;
+    background-color: #209cee;
     color: white;
     /*color: #ffffff;*/
     padding-left: 5em;
@@ -36,7 +36,7 @@ header {
 h1 {
     margin: 0;
     line-height: 4rem;
-    
+
 }
 
 /* SPLASHSCREEN */
@@ -89,7 +89,7 @@ p {
     margin: 1em 10%;
     padding: 1em;
     border-style: solid;
-    border-color: #333366;
+    border-color: #209cee;
     border-width: 0 0.3em 0 1em;
 }
 
@@ -99,7 +99,7 @@ figure {
     display: inline-block;
     width: 40%;
     margin: 3%;
-    box-shadow: 0 0 5px #333366;
+    box-shadow: 0 0 5px #209cee;
 }
 
 figure img {
@@ -110,7 +110,7 @@ figure img {
 figure figcaption {
     text-align: center;
     font-size: 0.6em;
-    border-top: #333366 solid 1px;
+    border-top: #209cee solid 1px;
     padding: 1em;
 }
 
@@ -130,11 +130,11 @@ section.points h4 {
     background-color: #f0f0f0;
     margin: 0;
     padding: 1em 2em;
-    border-bottom: #333366 dashed 2px;
+    border-bottom: #209cee dashed 2px;
 }
 
 section.points ul {
-    background-color: #333366;
+    background-color: #209cee;
     color: white;
     margin: 0;
     padding: 2em 1em;
@@ -155,7 +155,7 @@ section.note {
     color: white;
     padding: 0.5em;
     border-radius: 5px;
-    box-shadow: 0 0 5px #333366;
+    box-shadow: 0 0 5px #209cee;
 
     transform: rotate(-20deg);
 }
@@ -209,7 +209,7 @@ label {
 }
 
 input[type=submit],input[type=reset] {
-    background-color: #333366;
+    background-color: #209cee;
     padding: 1em 2em;
     border: 0;
     border-radius: 0;

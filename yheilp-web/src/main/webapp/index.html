@@ -20,108 +20,147 @@
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
 </head>
 
-<body>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+<main>
 
-<!-- SPLASHSCREEN -->
-<div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
-    <h1>Yheilp<br/>
-        <small class="text-secondary">loading...</small>
-    </h1>
-</div>
+    <body>
 
-
-<div class="fluid-container" ng-controller="RestaurantController as ctrl">
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-            <a class="navbar-brand" href="#">YHEILP</a>
-        </nav>
-    </header>
-
-    <ul class="list-group">
-        <li ng-repeat="(id,title) in ctrl.restaurants" class="list-group-item">
-            {{title}}
-            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">click</a>
-        </li>
-    </ul>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.title}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body ">
-                    <div class="d-flex d-flex justify-content-center">
-                        <div class="card text-center " style="width: 20rem; margin-bottom:20px">
-                            <img class="card-img-top" ng-src="{{ctrl.selected.image}}" alt="{{ctrl.selected.title}}">
-                            <div class="card-body">
-                                <p class="card-text text-secondary"><span class="badge badge-secondary">{{ctrl.selected.description}}</span> - {{ctrl.selected.title}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-                    <div class="text-left">
-                        <p> Review </p>
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addReview(5)" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addReview(4)" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addReview(3)" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addReview(2)" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addReview(1)" title="Sucks big time - 1 star"></label>
-                        </fieldset>
-                    </div>
-                    <ul class="list-group clearfix">
-                        <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
-                            <span class="badge badge-success">{{note.score}}</span>
-                            <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
+    <!-- SPLASHSCREEN -->
+    <div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
+        <h1>YHEILP<br/>
+            <small class="text-secondary">loading...</small>
+        </h1>
     </div>
 
 
-</div>
+    <div class="fluid-container" ng-controller="RestaurantController as ctrl">
+
+        <!-- HEADER -->
+        <header>
+            <div style="background-color: #209cee"  class="navbar navbar-light fixed-top d-flex " >
+                <div class="nav-item">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shop" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                    </svg>
+                    <a style="font-family: Arial, Helvetica, Verdana, sans-serif; color:whitesmoke" class="navbar-brand" href="#">YHEILP</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="d-flex d-flex justify-content-center">
+                            <div class="card text-center " style="width: 20rem; margin-bottom:20px">
+                                <img class="card-img-top" ng-src="{{ctrl.selected.image}}" alt="{{ctrl.selected.title}}">
+                                <div class="card-body">
+                                    <p class="card-text text-secondary"><span class="badge badge-secondary">Lieu</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="text-left">
+                            <p> Commentaires </p>
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addReview(5)" title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addReview(4)" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addReview(3)" title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addReview(2)" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addReview(1)" title="Sucks big time - 1 star"></label>
+                            </fieldset>
+                        </div>
+                        <ul class="list-group clearfix">
+                            <li ng-repeat="review in ctrl.selected.commentaires " class="list-group-item">
+                                <span class="badge badge-success">{{review.score}}</span>
+                                <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div ng-repeat="(id,title) in ctrl.restaurants " class="col-md-4" >
+                        <div class="card mb-4 shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Photo</text></svg>
+                            <div class="card-body">
+                                <p class="card-text">{{title}}</p>
+                                <p class="card-text">description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
-<script>
-    angular.module("yheilp", []).controller("RestaurantController", function ($http) {
-        var that = this;
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/yheilp/api/restaurants/'
-        }).then(function successCallback(response) {
-            that.restaurants = response.data;
-        });
-
-        var refreshSelected = function (restaurantId) {
-            this.selected = {};
+    <!-- SCRIPT -->
+    <script>
+        angular.module("yheilp", []).controller("RestaurantController", function ($http) {
+            var that = this;
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/yheilp/api/restaurants/' + restaurantId
+                url: 'http://localhost:8080/yheilp/api/restaurants/'
             }).then(function successCallback(response) {
-                that.selected = response.data;
+                that.restaurants = response.data;
             });
 
-        };
-        this.loadModal = function (restaurautId) {
-            refreshSelected(restaurautId);
-        }
+            var refreshSelected = function (restaurantId) {
+                this.selected = {};
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/yheilp/api/restaurants/' + restaurantId
+                }).then(function successCallback(response) {
+                    that.selected = response.data;
+                });
 
-    });
-</script>
+            };
 
-</body>
+            this.loadModal = function (restaurantId) {
+                refreshSelected(restaurantId);
+            }
+
+        });
+    </script>
+
+    </body>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+</main>
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>This site has been made by Alexis & Alexandre!</p>
+    </div>
+</footer>
 </html>

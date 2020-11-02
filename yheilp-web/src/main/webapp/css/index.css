@@ -2,7 +2,6 @@ body {
     padding-top: 5rem;
 }
 
-
 /* SPLASHSCREEN */
 .splashscreen.ng-cloak {
     visibility: visible;
@@ -25,4 +24,15 @@ body {
 
 .splashscreen small {
     font-size: 50%;
+}
+
+
+/* FOOTER */
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
 }
