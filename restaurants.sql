@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `lieux`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lieux` (
-  `id` bigint(20) NOT NULL,
+  `idlieux` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`idlieux`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,11 +51,13 @@ DROP TABLE IF EXISTS `restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant` (
-  `id` bigint(20) NOT NULL,
+  `idrestaurant` bigint(20) NOT NULL,
+  `idlieux` bigint(20) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`idrestaurant`),
+  FOREIGN KEY (`idlieux`) REFERENCES lieux(`idlieux`) ON DELETE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,7 +67,7 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
-INSERT INTO `restaurant` VALUES (165,'http://jee.chticod.eu/img/lab06/angular_upandrunning.jpg','PANCOOK Lille','Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).');
+INSERT INTO `restaurant` VALUES (165,58,'http://jee.chticod.eu/img/lab06/angular_upandrunning.jpg','PANCOOK Lille','Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).');
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,12 +79,12 @@ DROP TABLE IF EXISTS `note`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `note` (
-  `id` bigint(20) NOT NULL,
+  `idnote` bigint(20) NOT NULL,
+  `idrestaurant` bigint(20) NOT NULL,
   /*`dateOfReview` datetime DEFAULT NULL,*/
   `score` int(11) NOT NULL,
-  `restaurant_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK8d76td2o7d2d8foei85l93b9w` (`restaurant_id`)
+  PRIMARY KEY (`idnote`),
+  FOREIGN KEY (`idrestaurant`) REFERENCES restaurant(`idrestaurant`) ON DELETE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +94,7 @@ CREATE TABLE `note` (
 
 LOCK TABLES `note` WRITE;
 /*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (245,4,165);
+INSERT INTO `note` VALUES (245,165,4);
 /*!40000 ALTER TABLE `note` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,12 +106,12 @@ DROP TABLE IF EXISTS `commentaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commentaire` (
-  `id` bigint(20) NOT NULL,
+  `idcommentaire` bigint(20) NOT NULL,
+  `idrestaurant` bigint(20) NOT NULL,
   /*`dateOfReview` datetime DEFAULT NULL,*/
   `description` varchar(255) DEFAULT NULL,
-  `restaurant_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKc5mec8ogc8jas7cf022nrsh11` (`restaurant_id`)
+  PRIMARY KEY (`idcommentaire`),
+  FOREIGN KEY (`idrestaurant`) REFERENCES restaurant(`idrestaurant`) ON DELETE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,6 +121,6 @@ CREATE TABLE `commentaire` (
 
 LOCK TABLES `commentaire` WRITE;
 /*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
-INSERT INTO `commentaire` VALUES (34,'Quel bel endroit, je recommande !',165);
+INSERT INTO `commentaire` VALUES (34,165,'Quel bel endroit, je recommande !');
 /*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
 UNLOCK TABLES;
