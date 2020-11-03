@@ -2,7 +2,6 @@ package yheilp.core.entity;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Restaurant implements Comparable<Restaurant>{
@@ -58,9 +57,7 @@ public class Restaurant implements Comparable<Restaurant>{
         this.description = description;
     }
 
-    public Lieux getLieux() {
-        return lieux;
-    }
+    public String getLieux() { return lieux.toString(); }
 
     public void setLieux(Lieux lieux) {
         this.lieux = lieux;

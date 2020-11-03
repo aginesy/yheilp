@@ -15,9 +15,19 @@ public class RestaurantDTO {
 
     private String description;
 
+   // private String lieu;
+
     private List<Note> notes;
 
     private List<Commentaire> commentaires;
+
+   /* public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    } */
 
     public Long getId() {
         return id;
@@ -66,4 +76,6 @@ public class RestaurantDTO {
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
+
+
 }

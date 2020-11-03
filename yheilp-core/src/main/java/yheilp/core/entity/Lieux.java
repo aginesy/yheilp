@@ -61,4 +61,9 @@ public class Lieux {
     public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
+
+    @Override
+    public String toString() {
+        return name +", " + country;
+    }
 }
