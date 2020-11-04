@@ -29,11 +29,9 @@
 
     <!-- SPLASHSCREEN -->
     <div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
-        <h1>YHEILP<br/>
-            <small class="text-secondary">loading...</small>
+        <h1>YHEILP<br/><small class="text-secondary">loading...</small>
         </h1>
     </div>
-
 
     <div class="fluid-container" ng-controller="RestaurantController as ctrl">
 
@@ -66,9 +64,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 </div>
             </div>
 
-
-
         </header>
+
 
         <!-- MODAL -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -123,15 +120,15 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
             <div class="container">
                 <div class="row">
 
-                    <div ng-repeat="(id,title) in ctrl.restaurants " class="col-md-4" >
+                    <div ng-repeat="restaurant in ctrl.restaurants " class="col-md-4" >
                         <div class="card mb-4 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Photo</text></svg>
+                            <div class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><img class="img-fluid" ng-src="{{restaurant.image}}" alt="{{restaurant.title}}"></svg>
                             <div class="card-body">
-                                <p class="card-text">{{title}}</p>
-                                <p class="card-text">description</p>
+                                <p class="card-text">{{restaurant.title}}</p>
+                                <p class="card-text">{{restaurant.description}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Voir</a>
+                                        <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(restaurant.id)">Voir</a>
                                     </div>
                                 </div>
                             </div>
