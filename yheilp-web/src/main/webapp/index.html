@@ -105,11 +105,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             </fieldset>
                         </div>
                         <ul class="list-group clearfix">
-                            <li ng-repeat="commentaires in ctrl.selected.commentaires " class="list-group-item">
-                                <span class="badge badge-success">{{review.score}}</span>
-                                <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
+                                <span class="badge badge-success">{{note.score}}</span>
                             </li>
                         </ul>
                     </div>

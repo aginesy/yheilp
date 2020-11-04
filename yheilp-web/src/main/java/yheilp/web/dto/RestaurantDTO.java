@@ -4,6 +4,7 @@ import yheilp.core.entity.Commentaire;
 import yheilp.core.entity.Note;
 
 import java.util.List;
+import java.util.Set;
 
 public class RestaurantDTO {
 
@@ -17,9 +18,9 @@ public class RestaurantDTO {
 
    // private String lieu;
 
-    private List<Note> notes;
+    private Set<Note> notes;
 
-    private List<Commentaire> commentaires;
+    private Set<Commentaire> commentaires;
 
    /* public String getLieu() {
         return lieu;
@@ -61,21 +62,17 @@ public class RestaurantDTO {
         this.description = description;
     }
 
-    public List<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
+    public void setNotes(final Set<Note> noteScore) { notes = noteScore;}
 
-    public List<Commentaire> getCommentaires() {
+    public Set<Commentaire> getCommentaires() {
         return commentaires;
     }
 
-    public void setCommentaires(List<Commentaire> commentaires) {
-        this.commentaires = commentaires;
-    }
+    public void setCommentaires(final Set<Commentaire> commentairesDescription) { commentaires = commentairesDescription;}
 
 
 }

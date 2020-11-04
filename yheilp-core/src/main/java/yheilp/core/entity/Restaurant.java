@@ -2,6 +2,7 @@ package yheilp.core.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Restaurant implements Comparable<Restaurant>{
@@ -19,8 +20,8 @@ public class Restaurant implements Comparable<Restaurant>{
     @ManyToOne
     private Lieux lieux;
 
-    @OneToMany
-    private List<Note> notes;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<Note> notes;
 
     @OneToMany
     private List<Commentaire> commentaires;
@@ -63,11 +64,11 @@ public class Restaurant implements Comparable<Restaurant>{
         this.lieux = lieux;
     }
 
-    public List<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(Set<Note> notes) {
         this.notes = notes;
     }
 
