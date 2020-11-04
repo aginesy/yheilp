@@ -9,7 +9,7 @@ public class Commentaire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idcommentaire;
 
     private String description;
 
@@ -17,11 +17,11 @@ public class Commentaire {
     private Restaurant restaurant;
 
     public Long getId() {
-        return id;
+        return idcommentaire;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idcommentaire) {
+        this.idcommentaire = idcommentaire;
     }
 
     public String getDescription() {

@@ -16,19 +16,19 @@ public class RestaurantDTO {
 
     private String description;
 
-   // private String lieu;
+    private String lieu;
 
     private Set<Note> notes;
 
     private Set<Commentaire> commentaires;
 
-   /* public String getLieu() {
+    public String getLieu() {
         return lieu;
     }
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
-    } */
+    }
 
     public Long getId() {
         return id;

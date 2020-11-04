@@ -17,14 +17,16 @@ public class Restaurant implements Comparable<Restaurant>{
 
     private String description;
 
-   /* @ManyToOne
+    /*@ManyToOne
     private Lieux lieux;
 
     @OneToMany(mappedBy = "restaurant")
     private Set<Note> notes;
 
-    @OneToMany
-    private List<Commentaire> commentaires;  */
+    @OneToMany(mappedBy = "restaurant")
+    private Set<Commentaire> commentaires;
+
+     */
 
     public Long getId() {
         return idrestaurant;
@@ -58,7 +60,7 @@ public class Restaurant implements Comparable<Restaurant>{
         this.description = description;
     }
 
-   /* public String getLieux() { return lieux.toString(); }
+    /*public String getLieux() { return lieux.toString(); }
 
     public void setLieux(Lieux lieux) {
         this.lieux = lieux;
@@ -72,14 +74,14 @@ public class Restaurant implements Comparable<Restaurant>{
         this.notes = notes;
     }
 
-    public List<Commentaire> getCommentaires() {
+    public Set<Commentaire> getCommentaires() {
         return commentaires;
     }
 
-    public void setCommentaires(List<Commentaire> commentaires) {
+    public void setCommentaires(Set<Commentaire> commentaires) {
         this.commentaires = commentaires;
-    }
-*/
+    }*/
+
     @Override
     public int compareTo(Restaurant o) { return title.compareTo(o.title); }
 }
