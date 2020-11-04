@@ -11,7 +11,7 @@ public class Lieux {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idlieux;
 
     private String name;
 
@@ -20,14 +20,14 @@ public class Lieux {
     private String description;
 
     @OneToMany
-    private List<Restaurant> restaurants;
+    private Set<Restaurant> restaurants;
 
     public Long getId() {
-        return id;
+        return idlieux;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idlieux) {
+        this.idlieux = idlieux;
     }
 
     public String getName() {
@@ -54,11 +54,11 @@ public class Lieux {
         this.description = description;
     }
 
-    public List<Restaurant> getRestaurants() {
+    public Set<Restaurant> getRestaurants() {
         return restaurants;
     }
 
-    public void setRestaurants(List<Restaurant> restaurants) {
+    public void setRestaurants(Set<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
 

@@ -39,7 +39,7 @@ public class RestaurantController implements RestController {
     public List<Restaurant> findAllRestaurants(){
         return restaurantService.findAll().stream().collect(Collectors.toList());
     }
-/*
+
     @GET
     @Path("/{restaurantId}")
     public RestaurantDTO findRestaurantDetails(@PathParam("restaurantId") long restaurantId){
@@ -49,10 +49,10 @@ public class RestaurantController implements RestController {
         restaurantDTO.setTitle(restaurant.getTitle());
         restaurantDTO.setImage(restaurant.getImage());
         restaurantDTO.setDescription(restaurant.getDescription());
-        restaurantDTO.setNotes(restaurant.getNotes());
+        //restaurantDTO.setNotes(restaurant.getNotes());
         //restaurantDTO.setCommentaires(restaurant.getDescription());
         //restaurantDTO.setLieu(restaurant.getLieux());
         return restaurantDTO;
-    }  */
+    }
 
 }

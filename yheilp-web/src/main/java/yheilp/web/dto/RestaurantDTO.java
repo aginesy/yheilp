@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class RestaurantDTO {
 
-    private Long id;
+    private Long idrestaurant;
 
     private String image;
 
@@ -16,7 +16,7 @@ public class RestaurantDTO {
 
     private String description;
 
-    private String lieu;
+    /*private String lieu;
 
     private Set<Note> notes;
 
@@ -28,14 +28,14 @@ public class RestaurantDTO {
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
-    }
+    }*/
 
     public Long getId() {
-        return id;
+        return idrestaurant;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idrestaurant) {
+        this.idrestaurant = idrestaurant;
     }
 
     public String getImage() {
@@ -62,7 +62,7 @@ public class RestaurantDTO {
         this.description = description;
     }
 
-    public Set<Note> getNotes() {
+    /*public Set<Note> getNotes() {
         return notes;
     }
 
@@ -74,5 +74,5 @@ public class RestaurantDTO {
 
     public void setCommentaires(final Set<Commentaire> commentairesDescription) { commentaires = commentairesDescription;}
 
-
+*/
 }
