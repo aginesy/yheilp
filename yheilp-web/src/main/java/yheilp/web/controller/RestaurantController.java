@@ -37,6 +37,7 @@ public class RestaurantController implements RestController {
     @GET
     @Path("")
     public List<Restaurant> findAllRestaurants(){
+        System.out.println(restaurantService.findAll().stream().collect(Collectors.toList()));
         return restaurantService.findAll().stream().collect(Collectors.toList());
     }
 /*

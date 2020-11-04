@@ -9,7 +9,7 @@ public class Restaurant implements Comparable<Restaurant>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idrestaurant;
 
     private String image;
 
@@ -27,11 +27,11 @@ public class Restaurant implements Comparable<Restaurant>{
     private List<Commentaire> commentaires;  */
 
     public Long getId() {
-        return id;
+        return idrestaurant;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idrestaurant) {
+        this.idrestaurant = idrestaurant;
     }
 
     public String getImage() {
