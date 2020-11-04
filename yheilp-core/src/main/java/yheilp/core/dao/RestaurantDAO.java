@@ -7,6 +7,8 @@ import yheilp.core.entity.Restaurant;
 
 public interface RestaurantDAO extends JpaRepository<Restaurant,Long> {
 
-    @Query("SELECT DISTINCT r FROM Restaurant r LEFT JOIN FETCH r.notes WHERE r.id=:id")
+    @Query("SELECT DISTINCT r FROM Restaurant r ")
     Restaurant getOneWithNoteLieuxAndCommentaire(@Param("id") long restaurantId);
 }
+
+/* LEFT JOIN FETCH r.notes LEFT JOIN FETCH r.lieux WHERE r.id=:id */

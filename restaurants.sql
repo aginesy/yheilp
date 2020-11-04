@@ -68,6 +68,7 @@ CREATE TABLE `restaurant` (
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
 INSERT INTO `restaurant` VALUES (165,58,'https://pancook.fr/wp-content/uploads/2018/05/pancook-lille.jpg','PANCOOK Lille','Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).');
+INSERT INTO `restaurant` VALUES (166,58,'https://ugc.zenchef.com/3/4/3/5/0/3/9/6/4/2/1416562423_153/48db3abb4e64d9c25cfc93be038128f0.clandscape_hd.jpg','Chiba','Ce restaurant japonais au cadre traditionnel sert des menus, des formules à volonté et des plats à emporter.');
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 
