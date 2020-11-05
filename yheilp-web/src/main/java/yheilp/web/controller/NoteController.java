@@ -28,7 +28,7 @@ public class NoteController implements RestController{
 
     @DELETE
     @Path("/{noteId}")
-    public void deleteReview(@PathParam("noteId")long noteId){
+    public void deleteNote(@PathParam("noteId")long noteId){
         noteService.delete(noteId);
     }
 

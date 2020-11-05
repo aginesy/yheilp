@@ -94,11 +94,11 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                         <div class="text-left">
                             <p> Commentaires </p>
                             <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addReview(5)" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addReview(4)" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addReview(3)" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addReview(2)" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addReview(1)" title="Sucks big time - 1 star"></label>
+                                <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addNote(5)" title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addNote(4)" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addNote(3)" title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addNote(2)" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addNote(1)" title="Sucks big time - 1 star"></label>
                             </fieldset>
                         </div>
                         <ul class="list-group clearfix">
@@ -109,6 +109,9 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                         <ul class="list-group clearfix">
                             <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
                                 <span class="badge badge-success">{{note.score}}</span>
+                                <button type="button" class="close" ng-click="ctrl.deleteNote(note.id)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -172,6 +175,26 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
 
             this.loadModal = function (restaurantId) {
                 refreshSelected(restaurantId);
+            }
+
+            this.addNote = function (score) {
+                var note = {"score": score};
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/yheilp/api/notes',
+                    data: note
+                }).then(function successCallback(response) {
+                    refreshSelected(that.selected.id);
+                });
+            }
+
+            this.deleteNote = function (noteId) {
+                $http({
+                    method: 'DELETE',
+                    url: 'http://localhost:8080/yheilp/api/notes/' + noteId,
+                }).then(function successCallback(response) {
+                    refreshSelected(that.selected.id);
+                });
             }
 
         });
