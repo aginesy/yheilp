@@ -1,5 +1,6 @@
 package yheilp.web.controller;
 
+import yheilp.core.entity.Location;
 import yheilp.core.entity.Note;
 import yheilp.core.entity.Restaurant;
 import yheilp.core.service.RestaurantService;
@@ -50,9 +51,9 @@ public class RestaurantController implements RestController {
         restaurantDTO.setTitle(restaurant.getTitle());
         restaurantDTO.setImage(restaurant.getImage());
         restaurantDTO.setDescription(restaurant.getDescription());
+        restaurantDTO.setLocation(restaurant.getLocation());
         //restaurantDTO.setNotes(restaurant.getNotes());
         //restaurantDTO.setCommentaires(restaurant.getDescription());
-        //restaurantDTO.setLocation(restaurant.getLocation());
         return restaurantDTO;
     }
 
