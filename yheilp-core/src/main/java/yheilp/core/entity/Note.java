@@ -1,11 +1,13 @@
 package yheilp.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({ "restaurant" })
 public class Note {
 
     @Id

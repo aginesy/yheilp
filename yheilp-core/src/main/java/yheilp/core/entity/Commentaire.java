@@ -1,10 +1,12 @@
 package yheilp.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({ "restaurant" })
 public class Commentaire {
 
     @Id
@@ -39,4 +41,6 @@ public class Commentaire {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
+
+
 }

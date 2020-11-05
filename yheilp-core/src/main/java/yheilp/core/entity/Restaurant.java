@@ -1,8 +1,12 @@
 package yheilp.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({ "notes", "commentaires" })
 public class Restaurant implements Comparable<Restaurant>{
 
     @Id
@@ -21,14 +25,20 @@ public class Restaurant implements Comparable<Restaurant>{
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "location_id"))
     private Location location;
-/*
-    @OneToMany(mappedBy = "restaurant")
+
+    @OneToMany
+    @JoinTable(
+            name = "note_restaurant",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     private Set<Note> notes;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany
+    @JoinTable(
+            name = "commentaire_restaurant",
+            joinColumns = @JoinColumn(name = "commentaire_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     private Set<Commentaire> commentaires;
-
-     */
 
     public String getImage() {
         return image;
@@ -69,7 +79,7 @@ public class Restaurant implements Comparable<Restaurant>{
     public void setLocation(Location location) {
         this.location = location;
     }
-    /*
+
     public Set<Note> getNotes() {
         return notes;
     }
@@ -84,7 +94,7 @@ public class Restaurant implements Comparable<Restaurant>{
 
     public void setCommentaires(Set<Commentaire> commentaires) {
         this.commentaires = commentaires;
-    }*/
+    }
 
     @Override
     public int compareTo(Restaurant o) { return title.compareTo(o.title); }

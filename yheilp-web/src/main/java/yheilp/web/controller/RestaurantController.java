@@ -52,8 +52,8 @@ public class RestaurantController implements RestController {
         restaurantDTO.setImage(restaurant.getImage());
         restaurantDTO.setDescription(restaurant.getDescription());
         restaurantDTO.setLocation(restaurant.getLocation());
-        //restaurantDTO.setNotes(restaurant.getNotes());
-        //restaurantDTO.setCommentaires(restaurant.getDescription());
+        restaurantDTO.setNotes(restaurant.getNotes());
+        restaurantDTO.setCommentaires(restaurant.getCommentaires());
         return restaurantDTO;
     }
 
