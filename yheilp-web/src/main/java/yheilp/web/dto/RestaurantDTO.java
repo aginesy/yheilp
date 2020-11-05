@@ -1,6 +1,7 @@
 package yheilp.web.dto;
 
 import yheilp.core.entity.Commentaire;
+import yheilp.core.entity.Location;
 import yheilp.core.entity.Note;
 
 import java.util.List;
@@ -16,25 +17,19 @@ public class RestaurantDTO {
 
     private String description;
 
-    /*private String lieu;
-
     private Set<Note> notes;
 
     private Set<Commentaire> commentaires;
 
-    public String getLieu() {
-        return lieu;
-    }
+    private Location location;
 
-    public void setLieu(String lieu) {
-        this.lieu = lieu;
-    }*/
+
 
     public Long getId() {
         return idrestaurant;
     }
 
-    public void setId(Long idrestaurant) {
+    public void setIdrestaurant(Long idrestaurant) {
         this.idrestaurant = idrestaurant;
     }
 
@@ -60,6 +55,14 @@ public class RestaurantDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     /*public Set<Note> getNotes() {

@@ -1,8 +1,6 @@
 package yheilp.core.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Restaurant implements Comparable<Restaurant>{
@@ -17,9 +15,13 @@ public class Restaurant implements Comparable<Restaurant>{
 
     private String description;
 
-    /*@ManyToOne
-    private Lieux lieux;
-
+    @ManyToOne
+    @JoinTable(
+            name = "restaurant_location",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_id"))
+    private Location location;
+/*
     @OneToMany(mappedBy = "restaurant")
     private Set<Note> notes;
 
@@ -27,14 +29,6 @@ public class Restaurant implements Comparable<Restaurant>{
     private Set<Commentaire> commentaires;
 
      */
-
-    public Long getId() {
-        return idrestaurant;
-    }
-
-    public void setId(Long idrestaurant) {
-        this.idrestaurant = idrestaurant;
-    }
 
     public String getImage() {
         return image;
@@ -60,12 +54,22 @@ public class Restaurant implements Comparable<Restaurant>{
         this.description = description;
     }
 
-    /*public String getLieux() { return lieux.toString(); }
-
-    public void setLieux(Lieux lieux) {
-        this.lieux = lieux;
+    public Long getIdrestaurant() {
+        return idrestaurant;
     }
 
+    public void setIdrestaurant(Long idrestaurant) {
+        this.idrestaurant = idrestaurant;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    /*
     public Set<Note> getNotes() {
         return notes;
     }

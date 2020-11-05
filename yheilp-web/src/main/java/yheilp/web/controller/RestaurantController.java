@@ -45,13 +45,14 @@ public class RestaurantController implements RestController {
     public RestaurantDTO findRestaurantDetails(@PathParam("restaurantId") long restaurantId){
         Restaurant restaurant = restaurantService.findRestaurantDetails(restaurantId);
         RestaurantDTO restaurantDTO = new RestaurantDTO();
-        restaurantDTO.setId(restaurantId);
+
+        restaurantDTO.setIdrestaurant(restaurantId);
         restaurantDTO.setTitle(restaurant.getTitle());
         restaurantDTO.setImage(restaurant.getImage());
         restaurantDTO.setDescription(restaurant.getDescription());
         //restaurantDTO.setNotes(restaurant.getNotes());
         //restaurantDTO.setCommentaires(restaurant.getDescription());
-        //restaurantDTO.setLieu(restaurant.getLieux());
+        //restaurantDTO.setLocation(restaurant.getLocation());
         return restaurantDTO;
     }
 

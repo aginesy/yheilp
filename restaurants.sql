@@ -17,31 +17,6 @@ USE `yheilp`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `lieux`
---
-
-DROP TABLE IF EXISTS `lieux`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `lieux` (
-  `idlieux` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idlieux`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `lieux`
---
-
-LOCK TABLES `lieux` WRITE;
-/*!40000 ALTER TABLE `lieux` DISABLE KEYS */;
-INSERT INTO `lieux` VALUES (58,'Lille','France','Wow'),(59,'Lyon','France','Double Wow');
-/*!40000 ALTER TABLE `lieux` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `restaurant`
@@ -52,12 +27,10 @@ DROP TABLE IF EXISTS `restaurant`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant` (
   `idrestaurant` bigint(20) NOT NULL,
-  `idlieux` bigint(20) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idrestaurant`),
-  FOREIGN KEY (`idlieux`) REFERENCES lieux(`idlieux`) ON DELETE CASCADE
+  PRIMARY KEY (`idrestaurant`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,10 +40,65 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
-INSERT INTO `restaurant` VALUES (165,58,'https://pancook.fr/wp-content/uploads/2018/05/pancook-lille.jpg','PANCOOK Lille','Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).');
-INSERT INTO `restaurant` VALUES (166,58,'https://ugc.zenchef.com/3/4/3/5/0/3/9/6/4/2/1416562423_153/48db3abb4e64d9c25cfc93be038128f0.clandscape_hd.jpg','Chiba','Ce restaurant japonais au cadre traditionnel sert des menus, des formules à volonté et des plats à emporter.');
+INSERT INTO `restaurant` VALUES (1,'https://pancook.fr/wp-content/uploads/2018/05/pancook-lille.jpg','PANCOOK Lille','Cadre contemporain tamisé, mets traditionnels soignés et spécialité de pancook (pain fourré au poulet).');
+INSERT INTO `restaurant` VALUES (2,'https://ugc.zenchef.com/3/4/3/5/0/3/9/6/4/2/1416562423_153/48db3abb4e64d9c25cfc93be038128f0.clandscape_hd.jpg','Chiba','Ce restaurant japonais au cadre traditionnel sert des menus, des formules à volonté et des plats à emporter.');
+INSERT INTO `restaurant` VALUES (3,'https://media.lyon-france.com/1280x993/205511/675641.jpg','Les Terrasses de Lyon','Gastronomie fine et vue panoramique sur la ville pour le chic restaurant de l''hôtel la Villa Florentine.');
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `location` (
+                            `idlocation` bigint(20) NOT NULL,
+                            `city` varchar(255) DEFAULT NULL,
+                            `country` varchar(255) DEFAULT NULL,
+                            PRIMARY KEY (`idlocation`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `location`
+--
+
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'Lille','France'),(2,'Lyon','France');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `restaurant_location`
+--
+
+DROP TABLE IF EXISTS `restaurant_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant_location` (
+                               `restaurant_id` bigint(20) NOT NULL,
+                               `location_id` bigint(20) NOT NULL,
+                               KEY (`restaurant_id`),
+                               KEY (`location_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restaurant_location`
+--
+
+LOCK TABLES `restaurant_location` WRITE;
+/*!40000 ALTER TABLE `restaurant_location` DISABLE KEYS */;
+INSERT INTO `restaurant_location` VALUES (1,1),(2,1),(3,2);
+/*!40000 ALTER TABLE `restaurant_location` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Table structure for table `note`
@@ -95,7 +123,7 @@ CREATE TABLE `note` (
 
 LOCK TABLES `note` WRITE;
 /*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (245,165,4);
+INSERT INTO `note` VALUES (245,1,4);
 /*!40000 ALTER TABLE `note` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,6 +150,6 @@ CREATE TABLE `commentaire` (
 
 LOCK TABLES `commentaire` WRITE;
 /*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
-INSERT INTO `commentaire` VALUES (34,165,'Quel bel endroit, je recommande !');
+INSERT INTO `commentaire` VALUES (34,1,'Quel bel endroit, je recommande !');
 /*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
 UNLOCK TABLES;
