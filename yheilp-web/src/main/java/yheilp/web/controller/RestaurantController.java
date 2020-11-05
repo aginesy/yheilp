@@ -57,4 +57,10 @@ public class RestaurantController implements RestController {
         return restaurantDTO;
     }
 
+    @POST
+    @Path("")
+    public void saveRestaurant(Restaurant dto){
+        restaurantService.save(dto);
+    }
+
 }

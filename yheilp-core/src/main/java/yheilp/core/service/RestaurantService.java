@@ -25,4 +25,8 @@ public class RestaurantService {
         return restaurantDAO.getOneWithLocation(restaurantId);
     }
 
+    public void save(Restaurant dto) {
+        restaurantDAO.save(dto);
+    }
+
 }
