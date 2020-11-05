@@ -24,7 +24,6 @@ public class RestaurantDTO {
     private Location location;
 
 
-
     public Long getId() {
         return idrestaurant;
     }
@@ -65,7 +64,7 @@ public class RestaurantDTO {
         this.location = location;
     }
 
-    /*public Set<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
@@ -77,5 +76,4 @@ public class RestaurantDTO {
 
     public void setCommentaires(final Set<Commentaire> commentairesDescription) { commentaires = commentairesDescription;}
 
-*/
 }

@@ -26,11 +26,11 @@ DROP TABLE IF EXISTS `restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant` (
-  `idrestaurant` bigint(20) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idrestaurant`)
+                              `idrestaurant` bigint(20) NOT NULL,
+                              `image` varchar(255) DEFAULT NULL,
+                              `title` varchar(255) DEFAULT NULL,
+                              `description` varchar(255) DEFAULT NULL,
+                              PRIMARY KEY (`idrestaurant`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -82,10 +82,10 @@ DROP TABLE IF EXISTS `restaurant_location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant_location` (
-                               `restaurant_id` bigint(20) NOT NULL,
-                               `location_id` bigint(20) NOT NULL,
-                               KEY (`restaurant_id`),
-                               KEY (`location_id`)
+                                       `restaurant_id` bigint(20) NOT NULL,
+                                       `location_id` bigint(20) NOT NULL,
+                                       KEY (`restaurant_id`),
+                                       KEY (`location_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,12 +108,10 @@ DROP TABLE IF EXISTS `note`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `note` (
-  `idnote` bigint(20) NOT NULL,
-  `idrestaurant` bigint(20) NOT NULL,
-  /*`dateOfReview` datetime DEFAULT NULL,*/
-  `score` int(11) NOT NULL,
-  PRIMARY KEY (`idnote`),
-  FOREIGN KEY (`idrestaurant`) REFERENCES restaurant(`idrestaurant`) ON DELETE CASCADE
+                        `idnote` bigint(20) NOT NULL,
+    /*`dateOfReview` datetime DEFAULT NULL,*/
+                        `score` int(11) NOT NULL,
+                        PRIMARY KEY (`idnote`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,9 +121,36 @@ CREATE TABLE `note` (
 
 LOCK TABLES `note` WRITE;
 /*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (245,1,4);
+INSERT INTO `note` VALUES (1,4);
 /*!40000 ALTER TABLE `note` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `note_restaurant`
+--
+
+DROP TABLE IF EXISTS `note_restaurant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `note_restaurant` (
+                                   `note_id` bigint(20) NOT NULL,
+                                   `restaurant_id` bigint(20) NOT NULL,
+                                   KEY (`note_id`),
+                                   KEY (`restaurant_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `note_restaurant`
+--
+
+LOCK TABLES `note_restaurant` WRITE;
+/*!40000 ALTER TABLE `note_restaurant` DISABLE KEYS */;
+INSERT INTO `note_restaurant` VALUES (1,1);
+/*!40000 ALTER TABLE `note_restaurant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 
 --
 -- Table structure for table `commentaire`
@@ -135,12 +160,9 @@ DROP TABLE IF EXISTS `commentaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commentaire` (
-  `idcommentaire` bigint(20) NOT NULL,
-  `idrestaurant` bigint(20) NOT NULL,
-  /*`dateOfReview` datetime DEFAULT NULL,*/
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idcommentaire`),
-  FOREIGN KEY (`idrestaurant`) REFERENCES restaurant(`idrestaurant`) ON DELETE CASCADE
+                               `idcommentaire` bigint(20) NOT NULL,
+                               `description` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`idcommentaire`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,6 +172,32 @@ CREATE TABLE `commentaire` (
 
 LOCK TABLES `commentaire` WRITE;
 /*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
-INSERT INTO `commentaire` VALUES (34,1,'Quel bel endroit, je recommande !');
+INSERT INTO `commentaire` VALUES (1,'Quel bel endroit, je recommande !');
+INSERT INTO `commentaire` VALUES (2,'C est booon !');
 /*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `note_restaurant`
+--
+
+DROP TABLE IF EXISTS `commentaire_restaurant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `commentaire_restaurant` (
+                                          `commentaire_id` bigint(20) NOT NULL,
+                                          `restaurant_id` bigint(20) NOT NULL,
+                                          KEY (`commentaire_id`),
+                                          KEY (`restaurant_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `commentaire_restaurant`
+--
+
+LOCK TABLES `commentaire_restaurant` WRITE;
+/*!40000 ALTER TABLE `commentaire_restaurant` DISABLE KEYS */;
+INSERT INTO `commentaire_restaurant` VALUES (1,1),(2,2);
+/*!40000 ALTER TABLE `commentaire_restaurant` ENABLE KEYS */;
 UNLOCK TABLES;

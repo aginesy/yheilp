@@ -102,6 +102,11 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             </fieldset>
                         </div>
                         <ul class="list-group clearfix">
+                            <li ng-repeat="commentaire in ctrl.selected.commentaires" class="list-group-item">
+                                <span class="badge badge-success">{{commentaire.description}}</span>
+                            </li>
+                        </ul>
+                        <ul class="list-group clearfix">
                             <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
                                 <span class="badge badge-success">{{note.score}}</span>
                             </li>
