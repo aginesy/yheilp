@@ -63,4 +63,10 @@ public class RestaurantController implements RestController {
         restaurantService.save(dto);
     }
 
+    @DELETE
+    @Path("/{restaurantId}")
+    public void deleteRestaurant(@PathParam("restaurantId")long restaurantId){
+        restaurantService.delete(restaurantId);
+    }
+
 }

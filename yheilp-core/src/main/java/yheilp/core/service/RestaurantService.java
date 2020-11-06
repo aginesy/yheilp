@@ -29,4 +29,8 @@ public class RestaurantService {
         restaurantDAO.save(dto);
     }
 
+    public void delete(long restaurantId) {
+        restaurantDAO.deleteById(restaurantId);
+    }
+
 }
