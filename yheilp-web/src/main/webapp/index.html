@@ -110,7 +110,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                         <ul class="list-group clearfix">
                             <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
                                 <span class="badge badge-success">{{note.score}}</span>
-                                <button type="button" class="close" ng-click="ctrl.deleteNote(note.id)">
+                                <button type="button" class="close" ng-click="ctrl.deleteNote(note.idnote)">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </li>
@@ -158,7 +158,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                                         <label for="locationToChoose">City</label>
                                         <select class="custom-select d-block w-100" id="locationToChoose" required>
                                             <option value="">Choose...</option>
-                                            <option ng-repeat="location in ctrl.locations" ng-model="locationToChoose" >{{location.city}}</option>
+                                            <option ng-repeat="location in ctrl.locations" ng-model="locationToChoose" value="location">{{location}}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please provide a valid location.
@@ -232,9 +232,9 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
 
     <!-- SCRIPT -->
     <script>
-        angular.module("yheilp", [])
+        var app = angular.module("yheilp", [])
 
-            .controller("RestaurantController", function ($http) {
+            app.controller("RestaurantController", function ($http) {
             var that = this;
             $http({
                 method: 'GET',
@@ -258,6 +258,15 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 refreshSelected(restaurantId);
             };
 
+            this.deleteNote = function (noteId) {
+                $http({
+                    method: 'DELETE',
+                    url: 'http://localhost:8080/yheilp/api/notes/' + noteId,
+                }).then(function successCallback(response) {
+                    refreshSelected(that.selected.id);
+                });
+            }
+
             this.addRestaurant = function (titleToAdd, imageURLToAdd, descriptionToAdd, locationToChoose) {
                     var restaurant = {"image": imageURLToAdd, "title": titleToAdd, "description": descriptionToAdd, "location": locationToChoose};
                     $http({
@@ -265,7 +274,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                         url: 'http://localhost:8080/yheilp/api/restaurants/',
                         data: restaurant
                     }).then(function successCallback(response) {
-                        location.reload();                   });
+                        console.log(location),
+                        location.reload();});
                 }
 
             this.deleteRestaurant = function (restaurantId) {
@@ -277,9 +287,10 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                     });
                 }
 
+
         })
 
-            .controller("LocationController", function ($http) {
+            app.controller("LocationController", function ($http) {
 
             var that = this;
             $http({
@@ -287,7 +298,22 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 url: 'http://localhost:8080/yheilp/api/locations/'
             }).then(function successCallback(response) {
                 that.locations = response.data;
-            })});
+            });
+
+            var refreshSelected = function (locationId) {
+                this.selected = {};
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/yheilp/api/locations/' + locationId
+                }).then(function successCallback(response) {
+                    that.selected = response.data;
+                });
+            };
+
+            this.loadModal = function (locationId) {
+                refreshSelected(locationId);
+            };
+            });
     </script>
 
     </body>
