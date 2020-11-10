@@ -26,6 +26,13 @@ public class Restaurant implements Comparable<Restaurant>{
             inverseJoinColumns = @JoinColumn(name = "idlocation"))
     private Location location;
 
+    @ManyToOne
+    @JoinTable(
+            name = "restaurant_contact",
+            joinColumns = @JoinColumn(name = "idrestaurant"),
+            inverseJoinColumns = @JoinColumn(name = "idcontact"))
+    private Contact contact;
+
     @OneToMany(mappedBy = "restaurant")
     private Set<Review> reviews;
 
@@ -78,6 +85,14 @@ public class Restaurant implements Comparable<Restaurant>{
         this.reviews = reviews;
     }
 
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 
     @Override
     public int compareTo(Restaurant o) { return title.compareTo(o.title); }

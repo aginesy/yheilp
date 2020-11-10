@@ -116,7 +116,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             <h4 class="text-white">-</h4>
                             <ul class="list-unstyled">
                                 <li><a href="locations.html" class="text-white">Locations</a></li>
-                                </ul>
+                            </ul>
+                            <hr>
                             <div class="text-white">
                                 <label for="editMode"><span>Edit Mode</span> </label>
                                 <button onclick="editModeControl()"  id="editModeButton" class="btn-outline-secondary" id="editMode">Off</button>
@@ -147,6 +148,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                                 <img class="card-img-top" ng-src="{{ctrl.selected.image}}" alt="{{ctrl.selected.title}}">
                                 <div class="card-body">
                                     <p class="card-text text-secondary"><span class="badge badge-secondary">{{ctrl.selected.location.city}}</span></p>
+                                    <p class="card-text text-secondary"><span class="badge badge-secondary">{{ctrl.selected.contact.phonenumber}}</span></p>
+                                    <p class="card-text text-secondary"><a href="{{ctrl.selected.contact.website}}">Website</a></p>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text text-secondary">{{ctrl.selected.description}}</p>
@@ -173,6 +176,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                                 <div class="col-md order-md-1">
                                     <input type="text" class="form-control" id="commentToAdd" ng-model="commentToAdd" placeholder="Write your review" required>
                                 </div>
+                                <hr>
                                 <div class="col-md order-md-1">
                                     <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="ctrl.addReview(score, commentToAdd)">Submit</button>
                                 </div>

@@ -1,5 +1,6 @@
 package yheilp.web.dto;
 
+import yheilp.core.entity.Contact;
 import yheilp.core.entity.Location;
 import yheilp.core.entity.Review;
 
@@ -18,6 +19,8 @@ public class RestaurantDTO {
     private Set<Review> reviews;
 
     private Location location;
+
+    private Contact contact;
 
 
     public Long getId() {
@@ -66,4 +69,7 @@ public class RestaurantDTO {
 
     public void setReviews(final Set<Review> reviewScore) { reviews = reviewScore;}
 
+    public Contact getContact() { return contact;    }
+
+    public void setContact(Contact contact) { this.contact = contact; }
 }

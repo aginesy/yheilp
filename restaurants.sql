@@ -101,6 +101,61 @@ UNLOCK TABLES;
 
 
 --
+-- Table structure for table `contact`
+--
+
+DROP TABLE IF EXISTS `contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contact` (
+                            `id` bigint(20) NOT NULL,
+                            `phonenumber` varchar(255) DEFAULT NULL,
+                            `website` varchar(255) DEFAULT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'+33 3 20 40 10 97','https://pancook.fr/menu-pancook/');
+INSERT INTO `contact` VALUES (2,'+33 3 20 57 62 44','http://chiba-lille-59000.zenchef.com/');
+INSERT INTO `contact` VALUES (3,'+33 4 72 56 56 02','https://www.thefork.fr/restaurant/les-terrasses-de-lyon-r4697#booking=&partySize=2');
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `restaurant_contact`
+--
+
+DROP TABLE IF EXISTS `restaurant_contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant_contact` (
+                                       `idrestaurant` bigint(20) NOT NULL,
+                                       `idcontact` bigint(20) NOT NULL,
+                                       KEY (`idrestaurant`),
+                                       KEY (`idcontact`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restaurant_contact`
+--
+
+LOCK TABLES `restaurant_contact` WRITE;
+/*!40000 ALTER TABLE `restaurant_contact` DISABLE KEYS */;
+INSERT INTO `restaurant_contact` VALUES (1,1),(2,2),(3,3);
+/*!40000 ALTER TABLE `restaurant_contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
 -- Table structure for table `review`
 --
 
