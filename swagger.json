@@ -1,0 +1,334 @@
+swagger: "2.0"
+info:
+description: "API Documentation of yheilp."
+version: "1.0.0"
+title: "Swagger yheilp"
+
+
+tags:
+
+- name: "restaurant"
+description: "Restaurants operations"
+- name: "location"
+description: "Location operations"
+- name: "review"
+description: "Review operations"
+- name: "contact"
+description: "Contact operations"
+
+schemes:
+- "https"
+- "http"
+
+securityDefinitions:
+api_key:
+type: "apiKey"
+name: "api_key"
+in: "header"
+
+paths:
+
+/restaurants:
+get:
+tags:
+- "restaurant"
+summary: "Returns all restaurants"
+description: "Returns a list of all restaurants"
+operationId: "findAllRestaurants()"
+produces:
+- "application/json"
+responses:
+"200":
+description: "successful operation"
+schema:
+$ref: "#/definitions/Restaurant"
+"400":
+description: "No Restaurant"
+"404":
+description: "Restaurant not found"
+
+security:
+- api_key: []
+
+post:
+tags:
+- "restaurant"
+summary: "Add a restaurant"
+description: "Add a restaurant"
+operationId: "saveRestaurant()"
+produces:
+- "application/json"
+parameters:
+- name: "titleToAdd"
+in: "formData"
+description: "new restaurant title"
+required: true
+type: "string"
+- name: "imageURLToAdd"
+in: "formData"
+description: "new restaurant image URL"
+required: true
+type: "string"
+- name: "descriptionToAdd"
+in: "formData"
+description: "new restaurant description"
+required: true
+type: "string"
+- name: "locationToChoose"
+in: "formData"
+description: "new restaurant location"
+required: true
+type: "string"
+- name: "phoneToAdd"
+in: "formData"
+description: "new restaurant phonenumber"
+required: true
+type: "string"
+- name: "websiteToAdd"
+in: "formData"
+description: "new restaurant website"
+required: true
+type: "string"
+responses:
+"200":
+description: "successful operation"
+
+/restaurants/{restaurantId}:
+get:
+tags:
+- "restaurant"
+summary: "Returns one restaurant"
+description: "Returns information about a restaurant"
+operationId: "findRestaurantDetails(restaurantId)"
+produces:
+- "application/json"
+parameters:
+- name: "restaurantId"
+in: "path"
+description: "restaurant id"
+- name: "title"
+in: "path"
+description: "restaurant title"
+type: "string"
+- name: "image"
+in: "path"
+description: "restaurant image URL"
+type: "string"
+- name: "description"
+in: "path"
+description: "restaurant description"
+type: "string"
+- name: "location"
+in: "path"
+description: "restaurant location"
+type: "object"
+- name: "phone"
+in: "path"
+description: "restaurant phonenumber"
+type: "string"
+- name: "website"
+in: "path"
+description: "restaurant website"
+type: "string"
+responses:
+"200":
+description: "successful operation"
+security:
+- api_key: []
+delete:
+tags:
+- "restaurant"
+summary: "Delete one restaurant"
+description: "Delete a restaurant"
+operationId: "deleteRestaurant(restaurantId)"
+parameters:
+- name: "restaurantId"
+in: "path"
+description: "restaurant id"
+required: true
+type: "integer"
+responses:
+"200":
+description: "successful operation"
+security:
+- api_key: []
+
+/locations:
+get:
+tags:
+- "location"
+summary: "Returns all locations"
+description: "Returns a list of all locations"
+operationId: "findAllLocations()"
+produces:
+- "application/json"
+parameters: []
+responses:
+"200":
+description: "successful operation"
+
+security:
+- api_key: []
+post:
+tags:
+- "location"
+summary: "Add a location"
+description: "Add a location"
+operationId: "saveLocation()"
+produces:
+- "application/json"
+parameters:
+- name: "city"
+in: "formData"
+description: "new location city"
+required: true
+type: "string"
+- name: "country"
+in: "formData"
+description: "new location country"
+required: true
+type: "string"
+responses:
+"200":
+description: "successful operation"
+
+/locations/{locationId}:
+delete:
+tags:
+- "location"
+summary: "Delete one location"
+description: "Delete a location"
+operationId: "deleteLocation(locationId)"
+parameters:
+- name: "locationId"
+in: "path"
+description: "location id"
+required: true
+type: "integer"
+responses:
+"200":
+description: "successful operation"
+security:
+- api_key: []
+
+/reviews:
+get:
+tags:
+- "review"
+summary: "Returns all reviews"
+description: "Returns a list of all reviews"
+operationId: "findAllReviews()"
+produces:
+- "application/json"
+parameters: []
+responses:
+"200":
+description: "successful operation"
+
+security:
+- api_key: []
+post:
+tags:
+- "review"
+summary: "Add a review"
+description: "Add a review"
+operationId: "saveReview()"
+produces:
+- "application/json"
+parameters:
+- name: "score"
+in: "formData"
+description: "new review score"
+required: true
+type: "integer"
+- name: "commentToAdd"
+in: "formData"
+description: "new review comment"
+required: true
+type: "string"
+responses:
+"200":
+description: "successful operation"
+
+/reviews/{reviewId}:
+delete:
+tags:
+- "review"
+summary: "Delete one review"
+description: "Delete a review"
+operationId: "deleteReview(reviewId)"
+parameters:
+- name: "reviewId"
+type: "string"
+in: "path"
+description: "review id"
+required: true
+responses:
+"200":
+description: "successful operation"
+security:
+- api_key: []
+
+
+
+definitions:
+
+Restaurant:
+type: "object"
+properties:
+id:
+type: "integer"
+format: "int64"
+image:
+type: "string"
+title:
+type: "string"
+description:
+type: "string"
+xml:
+name: "Restaurant"
+
+Location:
+type: "object"
+properties:
+id:
+type: "integer"
+format: "int64"
+city:
+type: "string"
+country:
+type: "string"
+xml:
+name: "Location"
+
+Contact:
+type: "object"
+properties:
+id:
+type: "integer"
+format: "int64"
+phonenumber:
+type: "string"
+website:
+type: "string"
+xml:
+name: "Contact"
+
+Review:
+type: "object"
+properties:
+id:
+type: "integer"
+format: "int64"
+score:
+type: "integer"
+format: "int64"
+comment:
+type: "string"
+dateOfReview:
+type: "object"
+restaurant_id:
+type: "integer"
+format: "int64"
+xml:
+name: "Review"
