@@ -12,7 +12,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idlocation;
+    private Long id;
 
     private String city;
 
@@ -21,12 +21,12 @@ public class Location {
     @OneToMany
     private Set<Restaurant> restaurants;
 
-    public Long getIdlocation() {
-        return idlocation;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdlocation(Long idlocation) {
-        this.idlocation = idlocation;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCity() {

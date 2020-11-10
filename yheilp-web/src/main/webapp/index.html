@@ -12,21 +12,78 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <!-- STYLE -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+
+    <style>
+
+        fieldset, label {
+            margin: 0;
+            padding: 0;
+        }
+
+        .rating {
+            border: none;
+            /*float: left;*/
+            width:32%;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+
+        .rating > input:checked ~ label, /* show gold star when clicked */
+        .rating:not(:checked) > label:hover, /* hover current star */
+        .rating:not(:checked) > label:hover ~ label {
+            color: #FFD700;
+        }
+
+        /* hover previous stars in list */
+
+        .rating > input:checked + label:hover, /* hover current star when changing rating */
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+        .rating > input:checked ~ label:hover ~ label {
+            color: #FFED85;
+        }
+    </style>
 
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
 </head>
 
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-<main>
 
-    <body>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+<body>
 
     <!-- SPLASHSCREEN -->
     <div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
@@ -59,8 +116,14 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             <h4 class="text-white">-</h4>
                             <ul class="list-unstyled">
                                 <li><a href="locations.html" class="text-white">Locations</a></li>
-                            </ul>
+                                </ul>
+                            <div class="text-white">
+                                <label for="editMode"><span>Edit Mode</span> </label>
+                                <button onclick="editModeControl()"  id="editModeButton" class="btn-outline-secondary" id="editMode">Off</button>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -91,28 +154,42 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             </div>
                         </div>
 
+
+                        <!-- REVIEWS -->
                         <hr>
-                        <div class="text-left">
-                            <p> Commentaires </p>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addNote(5)" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addNote(4)" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addNote(3)" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addNote(2)" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addNote(1)" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+                        <div>
+                            <div class="text-left justify-content-center">
+                                <div>
+                                    <fieldset class="rating">
+                                        <input type="radio" id="star5" name="rating" ng-model="score" ng-value="5"/><label class="full" for="star5" title="5/5"></label>
+                                        <input type="radio" id="star4" name="rating" ng-model="score" ng-value="4"/><label class="full" for="star4" title="4/5"></label>
+                                        <input type="radio" id="star3" name="rating" ng-model="score" ng-value="3"/><label class="full" for="star3" title="3/5"></label>
+                                        <input type="radio" id="star2" name="rating" ng-model="score" ng-value="2"/><label class="full" for="star2" title="2/5"></label>
+                                        <input type="radio" id="star1" name="rating" ng-model="score" ng-value="1"/><label class="full" for="star1" title="1/5"></label>
+                                    </fieldset>
+
+
+                                </div>
+                                <div class="col-md order-md-1">
+                                    <input type="text" class="form-control" id="commentToAdd" ng-model="commentToAdd" placeholder="Write your review" required>
+                                </div>
+                                <div class="col-md order-md-1">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="ctrl.addReview(score, commentToAdd)">Submit</button>
+                                </div>
+                            </div>
                         </div>
+
+                        <hr>
+
+                        <!-- REVIEWS LIST -->
+                        <p> Reviews </p>
                         <ul class="list-group clearfix">
-                            <li ng-repeat="commentaire in ctrl.selected.commentaires" class="list-group-item">
-                                <span class="badge badge-success">{{commentaire.description}}</span>
-                            </li>
-                        </ul>
-                        <ul class="list-group clearfix">
-                            <li ng-repeat="note in ctrl.selected.notes" class="list-group-item">
-                                <span class="badge badge-success">{{note.score}}</span>
-                                <button type="button" class="close" ng-click="ctrl.deleteNote(note.id)">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <li ng-repeat="review in ctrl.selected.reviews" class="list-group-item">
+                                <span class="badge badge-success">{{review.score}}</span><small class="text-muted">   {{review.dateOfReview | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                                <p>{{review.comment}}</p>
+                                    <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                             </li>
                         </ul>
                     </div>
@@ -180,9 +257,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
@@ -193,11 +268,13 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 <!-- LIST -->
                 <div class="row">
                     <div ng-repeat="restaurant in ctrl.restaurants " class="col-md-4" >
-                        <div class="hover-btn">
-                            <button style="color: #663333" type="button" class="close btn btn-default btn-square btn-lg" data-dismiss="alert" ng-click="ctrl.deleteRestaurant(restaurant.idrestaurant)">
-                                <span aria-hidden="true">×</span>
-                                <span class="sr-only">Close</span>
-                            </button>
+                        <div class="editModeOnly" style="display: none">
+                            <div class="hover-btn">
+                                <button style="color: #663333" type="button" class="close btn btn-default btn-square btn-lg" data-dismiss="alert" ng-click="ctrl.deleteRestaurant(restaurant.id)">
+                                    <span aria-hidden="true">×</span>
+                                    <span class="sr-only">Delete</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="card mb-4 shadow-sm">
                             <div class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><img class="img-fluid" ng-src="{{restaurant.image}}" alt="{{restaurant.title}}"></svg>
@@ -206,32 +283,29 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                                     <p class="card-text">{{restaurant.description}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(restaurant.idrestaurant)">Voir</a>
+                                            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(restaurant.id)">View</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 align-items-center">
-                        <a style="border-color: #209cee" type="button" class="btn btn-default btn-circle btn-lg" href="#" role="button" data-toggle="modal" data-target="#addRestaurantPage">+</a>
-                    </div>
+
+                    <!-- ADD BUTTON -->
+                        <div class="col-md-4 align-items-center editModeOnly" style="display: none">
+                            <a style="border-color: #209cee" type="button" class="btn btn-default btn-circle btn-lg" href="#" role="button" data-toggle="modal" data-target="#addRestaurantPage">+</a>
+                        </div>
 
                 </div>
-
-                <!-- ADD BUTTON -->
-
-
             </div>
-
         </div>
-
-
     </div>
 
 
     <!-- SCRIPT -->
     <script>
+
+
         angular.module("yheilp", [])
 
             .controller("RestaurantController", function ($http) {
@@ -257,6 +331,26 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
             this.loadModal = function (restaurantId) {
                 refreshSelected(restaurantId);
             };
+
+            this.addReview = function (score, commentToAdd) {
+                    var review = {"score": score, "dateOfReview": new Date(), "restaurant":{"id": this.selected.id }, "comment": commentToAdd};
+                    $http({
+                        method: 'POST',
+                        url: 'http://localhost:8080/yheilp/api/reviews',
+                        data: review
+                    }).then(function successCallback(response) {
+                        refreshSelected(that.selected.id);
+                    });
+                } ;
+
+                this.deleteReview = function (reviewId) {
+                    $http({
+                        method: 'DELETE',
+                        url: 'http://localhost:8080/yheilp/api/reviews/' + reviewId,
+                    }).then(function successCallback(response) {
+                        refreshSelected(that.selected.id);
+                    });
+                } ;
 
             this.addRestaurant = function (titleToAdd, imageURLToAdd, descriptionToAdd, locationToChoose) {
                     var restaurant = {"image": imageURLToAdd, "title": titleToAdd, "description": descriptionToAdd, "location": locationToChoose};
@@ -289,19 +383,16 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 that.locations = response.data;
             })});
     </script>
-
     </body>
-
-</main>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 <footer class="text-muted">
     <div class="container">
         <p class="float-right">
-            <a href="#">Revenir en haut</a>
+            <a href="#">Top</a>
         </p>
-        <p>Ce site a été réalisé par Alexis & Alexandre !</p>
+        <p>This site was designed by Alexis & Alexandre!</p>
     </div>
 </footer>
 

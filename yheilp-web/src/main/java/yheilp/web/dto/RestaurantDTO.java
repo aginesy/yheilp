@@ -1,15 +1,13 @@
 package yheilp.web.dto;
 
-import yheilp.core.entity.Commentaire;
 import yheilp.core.entity.Location;
-import yheilp.core.entity.Note;
+import yheilp.core.entity.Review;
 
-import java.util.List;
 import java.util.Set;
 
 public class RestaurantDTO {
 
-    private Long idrestaurant;
+    private Long id;
 
     private String image;
 
@@ -17,19 +15,17 @@ public class RestaurantDTO {
 
     private String description;
 
-    private Set<Note> notes;
-
-    private Set<Commentaire> commentaires;
+    private Set<Review> reviews;
 
     private Location location;
 
 
     public Long getId() {
-        return idrestaurant;
+        return id;
     }
 
-    public void setIdrestaurant(Long idrestaurant) {
-        this.idrestaurant = idrestaurant;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImage() {
@@ -64,16 +60,10 @@ public class RestaurantDTO {
         this.location = location;
     }
 
-    public Set<Note> getNotes() {
-        return notes;
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
-    public void setNotes(final Set<Note> noteScore) { notes = noteScore;}
-
-    public Set<Commentaire> getCommentaires() {
-        return commentaires;
-    }
-
-    public void setCommentaires(final Set<Commentaire> commentairesDescription) { commentaires = commentairesDescription;}
+    public void setReviews(final Set<Review> reviewScore) { reviews = reviewScore;}
 
 }
