@@ -12,6 +12,7 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 
     <!-- STYLE -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -23,9 +24,7 @@
 </head>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-<main>
-
-    <body>
+ <body>
 
     <!-- SPLASHSCREEN -->
     <div class="splashscreen d-flex align-items-center justify-content-center">
@@ -59,6 +58,11 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                             <ul class="list-unstyled">
                                 <li><a href="locations.html" class="text-white">Locations</a></li>
                             </ul>
+                            <hr>
+                            <div class="text-white">
+                                <label for="editMode"><span>Edit Mode</span> </label>
+                                <button onclick="editModeControl()"  id="editModeButton" class="btn-outline-secondary" id="editMode">Off</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,17 +71,71 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
         </header>
 
     </div>
+    <!-- LOCATION LIST-->
+    <div class="container justify-content-between align-items-center">
+    <div id="locationTab" ng-controller="LocationController as ctrl">
 
-    <div ng-controller="LocationController as ctrl">
-        <ul class="list-group">
-            <li ng-repeat="location in ctrl.locations " class="list-group-item">
-                <a href="#">{{location.city}}</a></li>
-            <li class="list-group-item">+</li>
-        </ul>
+        <div class="row py-5 justify-content-center">
+            <div class="col-md-10">
+                <ul class="list-group">
+                    <li ng-repeat="location in ctrl.locations | orderBy:'city'" class="list-group-item">
+                        <a href="#">{{location.city}}</a>
+                        <button type="button" class="close editModeOnly" style="display: none" ng-click="ctrl.deleteLocation(location.id)"><span aria-hidden="true">&times;</span></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10 justify-content-center editModeOnly" style="display: none">
+                <a type="button" class="btn btn-default btn-circle btn-lg" href="#" role="button" data-toggle="modal" data-target="#addLocationPage">Add</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- ADDLOCATIONPAGE -->
+    <div class="modal fade" id="addLocationPage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ng-controller="LocationController as ctrl">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLocationPageLabel"><b>New location</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="d-flex d-flex justify-content-center">
+                        <div class="col-md-8 order-md-1">
+                            <form class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="cityToAdd">City</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cityToAdd" ng-model="cityToAdd" required>
+                                        <div class="invalid-feedback" style="width: 100%;">
+                                            The city is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="countryToAdd">Country</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="countryToAdd" ng-model="countryToAdd" required>
+                                        <div class="invalid-feedback" style="width: 100%;">
+                                            The country is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mb-4">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="ctrl.addLocation(cityToAdd, countryToAdd)">Add a new location</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
-</main>
 
 
 <script>
@@ -91,6 +149,49 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                 url: 'http://localhost:8080/yheilp/api/locations/'
             }).then(function successCallback(response) {
                 that.locations = response.data;
-            })});
+            });
+
+            var refreshSelected = function (locationId) {
+                this.selected = {};
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/yheilp/api/locations/' + locationId
+                }).then(function successCallback(response) {
+                    that.selected = response.data;
+
+                });
+
+            };
+
+
+            this.loadModal = function (restaurantId) {
+                refreshSelected(restaurantId);
+            };
+
+            this.addLocation = function (city, country) {
+                var loc = {"city": city, "country": country};
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/yheilp/api/locations',
+                    data: loc
+                }).then(function successCallback(response) {
+                    location.reload();
+
+                });
+            };
+
+            this.deleteLocation = function (locationId) {
+                $http({
+                    method: 'DELETE',
+                    url: 'http://localhost:8080/yheilp/api/locations/' + locationId,
+                }).then(function successCallback(response) {
+                    location.reload();
+
+                })
+            };
+        });
+
+
+
 </script>
 </html>

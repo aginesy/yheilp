@@ -22,7 +22,7 @@ public class RestaurantService {
     }
 
     public Restaurant findRestaurantDetails(long restaurantId) {
-        return restaurantDAO.getOneWithLocation(restaurantId);
+        return restaurantDAO.getOneWithLocationReviewsContact(restaurantId);
     }
 
     public void save(Restaurant dto) {

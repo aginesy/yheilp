@@ -3,20 +3,19 @@ package yheilp.core.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({ "restaurants" })
-public class Location {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String city;
+    private String phonenumber;
 
-    private String country;
+    private String website;
 
     @OneToMany
     private Set<Restaurant> restaurants;
@@ -29,20 +28,20 @@ public class Location {
         this.id = id;
     }
 
-    public String getCity() {
-        return city;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public String getCountry() {
-        return country;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public Set<Restaurant> getRestaurants() {
@@ -52,7 +51,4 @@ public class Location {
     public void setRestaurants(Set<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
-
-    @Override
-    public String toString() { return city +", " + country; }
 }

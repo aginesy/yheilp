@@ -26,11 +26,11 @@ DROP TABLE IF EXISTS `restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant` (
-                              `idrestaurant` bigint(20) NOT NULL AUTO_INCREMENT,
+                              `id` bigint(20) NOT NULL AUTO_INCREMENT,
                               `image` varchar(255) DEFAULT NULL,
                               `title` varchar(255) DEFAULT NULL,
                               `description` varchar(255) DEFAULT NULL,
-                              PRIMARY KEY (`idrestaurant`)
+                              PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,10 +55,10 @@ DROP TABLE IF EXISTS `location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `location` (
-                            `idlocation` bigint(20) NOT NULL,
+                            `id` bigint(20) NOT NULL,
                             `city` varchar(255) DEFAULT NULL,
                             `country` varchar(255) DEFAULT NULL,
-                            PRIMARY KEY (`idlocation`)
+                            PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -82,10 +82,10 @@ DROP TABLE IF EXISTS `restaurant_location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restaurant_location` (
-                                       `restaurant_id` bigint(20) NOT NULL,
-                                       `location_id` bigint(20) NOT NULL,
-                                       KEY (`restaurant_id`),
-                                       KEY (`location_id`)
+                                       `idrestaurant` bigint(20) NOT NULL,
+                                       `idlocation` bigint(20) NOT NULL,
+                                       KEY (`idrestaurant`),
+                                       KEY (`idlocation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,103 +101,123 @@ UNLOCK TABLES;
 
 
 --
--- Table structure for table `note`
+-- Table structure for table `contact`
 --
 
-DROP TABLE IF EXISTS `note`;
+DROP TABLE IF EXISTS `contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `note` (
-                        `idnote` bigint(20) NOT NULL,
-    /*`dateOfReview` datetime DEFAULT NULL,*/
+CREATE TABLE `contact` (
+                            `id` bigint(20) NOT NULL,
+                            `phonenumber` varchar(255) DEFAULT NULL,
+                            `website` varchar(255) DEFAULT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'+33 3 20 40 10 97','https://pancook.fr/menu-pancook/');
+INSERT INTO `contact` VALUES (2,'+33 3 20 57 62 44','http://chiba-lille-59000.zenchef.com/');
+INSERT INTO `contact` VALUES (3,'+33 4 72 56 56 02','https://www.thefork.fr/restaurant/les-terrasses-de-lyon-r4697#booking=&partySize=2');
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `restaurant_contact`
+--
+
+DROP TABLE IF EXISTS `restaurant_contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant_contact` (
+                                       `idrestaurant` bigint(20) NOT NULL,
+                                       `idcontact` bigint(20) NOT NULL,
+                                       KEY (`idrestaurant`),
+                                       KEY (`idcontact`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restaurant_contact`
+--
+
+LOCK TABLES `restaurant_contact` WRITE;
+/*!40000 ALTER TABLE `restaurant_contact` DISABLE KEYS */;
+INSERT INTO `restaurant_contact` VALUES (1,1),(2,2),(3,3);
+/*!40000 ALTER TABLE `restaurant_contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `review`
+--
+
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `review` (
+                        `id` bigint(20) NOT NULL,
                         `score` int(11) NOT NULL,
-                        PRIMARY KEY (`idnote`)
+                        `comment` varchar(255) DEFAULT NULL,
+                        `dateOfReview` datetime DEFAULT NULL,
+                        `restaurant_id` bigint(20) DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY (`restaurant_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `note`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `note` WRITE;
-/*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (1,4);
-/*!40000 ALTER TABLE `note` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1,4,'Génial !','2020-10-06 18:38:48', 2);
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
--- Table structure for table `note_restaurant`
+-- Table structure for table `hibernate_sequence`
 --
 
-DROP TABLE IF EXISTS `note_restaurant`;
+DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `note_restaurant` (
-                                   `note_id` bigint(20) NOT NULL,
-                                   `restaurant_id` bigint(20) NOT NULL,
-                                   KEY (`note_id`),
-                                   KEY (`restaurant_id`)
+CREATE TABLE `hibernate_sequence` (
+    `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `note_restaurant`
+-- Dumping data for table `hibernate_sequence`
 --
 
-LOCK TABLES `note_restaurant` WRITE;
-/*!40000 ALTER TABLE `note_restaurant` DISABLE KEYS */;
-INSERT INTO `note_restaurant` VALUES (1,1);
-/*!40000 ALTER TABLE `note_restaurant` ENABLE KEYS */;
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (358),(358),(358);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
 
 --
--- Table structure for table `commentaire`
+-- Dumping events for database 'yheilp'
 --
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-DROP TABLE IF EXISTS `commentaire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commentaire` (
-                               `idcommentaire` bigint(20) NOT NULL,
-                               `description` varchar(255) DEFAULT NULL,
-                               PRIMARY KEY (`idcommentaire`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
---
--- Dumping data for table `commentaire`
---
-
-LOCK TABLES `commentaire` WRITE;
-/*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
-INSERT INTO `commentaire` VALUES (1,'Quel bel endroit, je recommande !');
-INSERT INTO `commentaire` VALUES (2,'C est booon !');
-/*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `note_restaurant`
---
-
-DROP TABLE IF EXISTS `commentaire_restaurant`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commentaire_restaurant` (
-                                          `commentaire_id` bigint(20) NOT NULL,
-                                          `restaurant_id` bigint(20) NOT NULL,
-                                          KEY (`commentaire_id`),
-                                          KEY (`restaurant_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `commentaire_restaurant`
---
-
-LOCK TABLES `commentaire_restaurant` WRITE;
-/*!40000 ALTER TABLE `commentaire_restaurant` DISABLE KEYS */;
-INSERT INTO `commentaire_restaurant` VALUES (1,1),(2,2);
-/*!40000 ALTER TABLE `commentaire_restaurant` ENABLE KEYS */;
-UNLOCK TABLES;

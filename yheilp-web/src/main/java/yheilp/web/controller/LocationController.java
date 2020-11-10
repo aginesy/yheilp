@@ -30,15 +30,16 @@ public class LocationController implements RestController{
        return locationService.findAll().stream().collect(Collectors.toList());
     }
 
-    @GET
-    @Path("/{locationId}")
-    public LocationDTO findLocationDetails(@PathParam("locationId") long locationId){
-        Location location = locationService.findLocationDetails(locationId);
-        LocationDTO locationDTO = new LocationDTO();
-
-        locationDTO.setIdlocation(locationId);
-        locationDTO.setCity(location.getCity());
-        locationDTO.setCountry(location.getCountry());
-        return locationDTO;
+    @POST
+    @Path("")
+    public void saveLocation(Location dto){
+        locationService.save(dto);
     }
+
+    @DELETE
+    @Path("/{locationId}")
+    public void deleteLocation(@PathParam("locationId")long locationId){
+        locationService.delete(locationId);
+    }
+
 }

@@ -8,6 +8,6 @@ import yheilp.core.entity.Restaurant;
 
 public interface LocationDAO extends JpaRepository<Location, Long> {
 
-    @Query("SELECT DISTINCT l FROM Location l WHERE l.idlocation=:idlocation")
-    Location getOneWithDetails(@Param("idlocation") long idlocation);
+    @Query("SELECT DISTINCT l FROM Location l WHERE l.id=:id")
+    Restaurant getLocationBy(@Param("id") long locationId);
 }

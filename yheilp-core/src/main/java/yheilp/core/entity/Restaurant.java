@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@JsonIgnoreProperties({ "notes", "commentaires" })
+@JsonIgnoreProperties({"reviews"})
 public class Restaurant implements Comparable<Restaurant>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idrestaurant;
+    private Long id;
 
     private String image;
 
@@ -22,23 +22,20 @@ public class Restaurant implements Comparable<Restaurant>{
     @ManyToOne
     @JoinTable(
             name = "restaurant_location",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "location_id"))
+            joinColumns = @JoinColumn(name = "idrestaurant"),
+            inverseJoinColumns = @JoinColumn(name = "idlocation"))
     private Location location;
 
-    @OneToMany
+    @ManyToOne
     @JoinTable(
-            name = "note_restaurant",
-            joinColumns = @JoinColumn(name = "note_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    private Set<Note> notes;
+            name = "restaurant_contact",
+            joinColumns = @JoinColumn(name = "idrestaurant"),
+            inverseJoinColumns = @JoinColumn(name = "idcontact"))
+    private Contact contact;
 
-    @OneToMany
-    @JoinTable(
-            name = "commentaire_restaurant",
-            joinColumns = @JoinColumn(name = "commentaire_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    private Set<Commentaire> commentaires;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<Review> reviews;
+
 
     public String getImage() {
         return image;
@@ -64,12 +61,12 @@ public class Restaurant implements Comparable<Restaurant>{
         this.description = description;
     }
 
-    public Long getIdrestaurant() {
-        return idrestaurant;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdrestaurant(Long idrestaurant) {
-        this.idrestaurant = idrestaurant;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Location getLocation() {
@@ -80,20 +77,21 @@ public class Restaurant implements Comparable<Restaurant>{
         this.location = location;
     }
 
-    public Set<Note> getNotes() {
-        return notes;
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
-    public void setNotes(Set<Note> notes) {
-        this.notes = notes;
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 
-    public Set<Commentaire> getCommentaires() {
-        return commentaires;
+
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setCommentaires(Set<Commentaire> commentaires) {
-        this.commentaires = commentaires;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     @Override
