@@ -188,7 +188,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                         <!-- REVIEWS LIST -->
                         <p> Reviews </p>
                         <ul class="list-group clearfix">
-                            <li ng-repeat="review in ctrl.selected.reviews" class="list-group-item">
+                            <li ng-repeat="review in ctrl.selected.reviews | orderBy:'-dateOfReview' " class="list-group-item">
                                 <span class="badge badge-success">{{review.score}}</span><small class="text-muted">   {{review.dateOfReview | date:'yyyy-MM-dd HH:mm:ss'}}</small>
                                 <p>{{review.comment}}</p>
                                     <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
@@ -239,7 +239,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                                         <label for="locationToChoose">City</label>
                                         <select class="custom-select d-block w-100" id="locationToChoose" required>
                                             <option value="">Choose...</option>
-                                            <option ng-repeat="location in ctrl.locations" ng-model="locationToChoose" >{{location.city}}</option>
+                                            <option ng-repeat="location in ctrl.locations | orderBy:'city'" ng-model="locationToChoose" >{{location.city}}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please provide a valid location.
@@ -267,7 +267,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
 
         <!-- ACCUEIL -->
         <div class="album py-5 bg-light">
-            <div class="container justify-content-between align-items-center">
+            <div class="container justify-content-center align-items-center">
 
                 <!-- LIST -->
                 <div class="row">
@@ -347,21 +347,21 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,156,238,1) 100%, r
                     });
                 } ;
 
-                this.deleteReview = function (reviewId) {
-                    $http({
-                        method: 'DELETE',
-                        url: 'http://localhost:8080/yheilp/api/reviews/' + reviewId,
+            this.deleteReview = function (reviewId) {
+                $http({
+                    method: 'DELETE',
+                    url: 'http://localhost:8080/yheilp/api/reviews/' + reviewId,
                     }).then(function successCallback(response) {
                         refreshSelected(that.selected.id);
                     });
                 } ;
 
             this.addRestaurant = function (titleToAdd, imageURLToAdd, descriptionToAdd, locationToChoose) {
-                    var restaurant = {"image": imageURLToAdd, "title": titleToAdd, "description": descriptionToAdd, "location": locationToChoose};
-                    $http({
-                        method: 'POST',
-                        url: 'http://localhost:8080/yheilp/api/restaurants/',
-                        data: restaurant
+                var restaurant = {"image": imageURLToAdd, "title": titleToAdd, "description": descriptionToAdd, "location": locationToChoose};
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/yheilp/api/restaurants/',
+                    data: restaurant
                     }).then(function successCallback(response) {
                         location.reload();                   });
                 }

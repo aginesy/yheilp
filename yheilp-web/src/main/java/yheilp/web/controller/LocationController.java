@@ -1,6 +1,7 @@
 package yheilp.web.controller;
 
 import yheilp.core.entity.Location;
+import yheilp.core.entity.Restaurant;
 import yheilp.core.service.LocationService;
 
 import javax.inject.Named;
@@ -25,6 +26,18 @@ public class LocationController implements RestController{
     @Path("")
     public List<Location> findAllLocations(){
        return locationService.findAll().stream().collect(Collectors.toList());
+    }
+
+    @POST
+    @Path("")
+    public void saveLocation(Location dto){
+        locationService.save(dto);
+    }
+
+    @DELETE
+    @Path("/{locationId}")
+    public void deleteLocation(@PathParam("locationId")long locationId){
+        locationService.delete(locationId);
     }
 
 }

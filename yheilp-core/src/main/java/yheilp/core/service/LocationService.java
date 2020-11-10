@@ -2,6 +2,7 @@ package yheilp.core.service;
 
 import yheilp.core.dao.LocationDAO;
 import yheilp.core.entity.Location;
+import yheilp.core.entity.Location;
 
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -18,4 +19,13 @@ public class LocationService {
     public List<Location> findAll(){
         return locationDAO.findAll();
     }
+
+    public void save(Location dto) {
+        locationDAO.save(dto);
+    }
+
+    public void delete(long LocationId) {
+        locationDAO.deleteById(LocationId);
+    }
+
 }
