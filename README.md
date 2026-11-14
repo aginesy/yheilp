@@ -2,7 +2,7 @@
 
 yheilp is a basic educational JavaEE webapp that manipulates a list of restaurants.
 
-##Architecture
+## Architecture
 
 yheilp is a multi-module Maven project built with _JDK 11_.
 It relies on 4 entities, interacting through _JAX-RS_:
